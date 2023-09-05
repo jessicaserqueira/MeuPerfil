@@ -122,8 +122,8 @@
 		4C3862B92A758A98005C9C3B /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				4C3862A72A758819005C9C3B /* MainViewController.swift */,
-				A486B5542AA7640A00321DB3 /* MainView.swift */,
+				A486B5602AA79A4E00321DB3 /* MainView */,
+				A486B55F2AA7986400321DB3 /* MyProfile */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -136,6 +136,22 @@
 				A486B5572AA767BC00321DB3 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A486B55F2AA7986400321DB3 /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyProfile;
+			sourceTree = "<group>";
+		};
+		A486B5602AA79A4E00321DB3 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				4C3862A72A758819005C9C3B /* MainViewController.swift */,
+				A486B5542AA7640A00321DB3 /* MainView.swift */,
+			);
+			path = MainView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
