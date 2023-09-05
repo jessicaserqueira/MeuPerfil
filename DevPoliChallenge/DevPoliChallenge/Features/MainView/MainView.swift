@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol MainViewDelegate: AnyObject {
+    func showMyProfile()
+}
+
 class MainView: UIView {
+    
+    weak var delegate: MainViewDelegate?
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -45,6 +51,11 @@ class MainView: UIView {
     }
     
     // MARK: - Actions
-    func setupActions() {}
+    func setupActions() {
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
     
+    @objc func buttonTapped() {
+        delegate?.showMyProfile()
+    }
 }
