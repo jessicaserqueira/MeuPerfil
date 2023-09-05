@@ -12,9 +12,14 @@
 		4C33FF352A75A4550002E765 /* DS+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C33FF342A75A4550002E765 /* DS+Colors.swift */; };
 		4C3862A42A758819005C9C3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3862A32A758819005C9C3B /* AppDelegate.swift */; };
 		4C3862A62A758819005C9C3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3862A52A758819005C9C3B /* SceneDelegate.swift */; };
-		4C3862A82A758819005C9C3B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3862A72A758819005C9C3B /* ViewController.swift */; };
+		4C3862A82A758819005C9C3B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3862A72A758819005C9C3B /* MainViewController.swift */; };
 		4C3862AD2A75881C005C9C3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3862AC2A75881C005C9C3B /* Assets.xcassets */; };
 		4C3862B02A75881C005C9C3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3862AE2A75881C005C9C3B /* LaunchScreen.storyboard */; };
+		A486B5552AA7640A00321DB3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5542AA7640A00321DB3 /* MainView.swift */; };
+		A486B55A2AA767BD00321DB3 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5572AA767BC00321DB3 /* Roboto-Regular.ttf */; };
+		A486B55B2AA767BD00321DB3 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */; };
+		A486B55C2AA767BD00321DB3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */; };
+		A486B55E2AA7698A00321DB3 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B55D2AA7698A00321DB3 /* UIFont+ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,10 +30,15 @@
 		4C3862A02A758819005C9C3B /* DevPoliChallenge-MeuPerfil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DevPoliChallenge-MeuPerfil.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3862A32A758819005C9C3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C3862A52A758819005C9C3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4C3862A72A758819005C9C3B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C3862A72A758819005C9C3B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4C3862AC2A75881C005C9C3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C3862AF2A75881C005C9C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C3862B12A75881C005C9C3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A486B5542AA7640A00321DB3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A486B5572AA767BC00321DB3 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		A486B55D2AA7698A00321DB3 /* UIFont+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				4C33FF2D2A75A2640002E765 /* UIColor+ext.swift */,
+				A486B55D2AA7698A00321DB3 /* UIFont+ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -79,6 +90,7 @@
 		4C3862A22A758819005C9C3B /* DevPoliChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				A486B5562AA7678300321DB3 /* Fonts */,
 				4C33FF2F2A75A3810002E765 /* DesignSystem */,
 				4C33FF2C2A75A2560002E765 /* Utils */,
 				4C3862B92A758A98005C9C3B /* Features */,
@@ -110,9 +122,20 @@
 		4C3862B92A758A98005C9C3B /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				4C3862A72A758819005C9C3B /* ViewController.swift */,
+				4C3862A72A758819005C9C3B /* MainViewController.swift */,
+				A486B5542AA7640A00321DB3 /* MainView.swift */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		A486B5562AA7678300321DB3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */,
+				A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */,
+				A486B5572AA767BC00321DB3 /* Roboto-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,7 +197,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A486B55C2AA767BD00321DB3 /* Roboto-Medium.ttf in Resources */,
+				A486B55A2AA767BD00321DB3 /* Roboto-Regular.ttf in Resources */,
 				4C3862B02A75881C005C9C3B /* LaunchScreen.storyboard in Resources */,
+				A486B55B2AA767BD00321DB3 /* Roboto-Bold.ttf in Resources */,
 				4C3862AD2A75881C005C9C3B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,9 +212,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C3862A82A758819005C9C3B /* ViewController.swift in Sources */,
+				4C3862A82A758819005C9C3B /* MainViewController.swift in Sources */,
+				A486B5552AA7640A00321DB3 /* MainView.swift in Sources */,
 				4C33FF352A75A4550002E765 /* DS+Colors.swift in Sources */,
 				4C33FF332A75A3F40002E765 /* DS.swift in Sources */,
+				A486B55E2AA7698A00321DB3 /* UIFont+ext.swift in Sources */,
 				4C33FF2E2A75A2640002E765 /* UIColor+ext.swift in Sources */,
 				4C3862A42A758819005C9C3B /* AppDelegate.swift in Sources */,
 				4C3862A62A758819005C9C3B /* SceneDelegate.swift in Sources */,
