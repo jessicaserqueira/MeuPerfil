@@ -11,11 +11,6 @@ import UIKit
 class MainViewController: UIViewController {
     var customView = MainView()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view = customView
@@ -26,6 +21,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: MainViewDelegate {
     func showMyProfile() {
-    
+        let VC = MyProfileViewController()
+        navigationController?.pushViewController(VC, animated: true)
     }
 }

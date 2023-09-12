@@ -20,6 +20,10 @@
 		A486B55B2AA767BD00321DB3 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */; };
 		A486B55C2AA767BD00321DB3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */; };
 		A486B55E2AA7698A00321DB3 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B55D2AA7698A00321DB3 /* UIFont+ext.swift */; };
+		A486B5622AA79B0F00321DB3 /* MayProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5612AA79B0F00321DB3 /* MayProfileView.swift */; };
+		A486B5642AA79B1D00321DB3 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5632AA79B1D00321DB3 /* MyProfileViewController.swift */; };
+		A486B5672AA8AF9600321DB3 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5662AA8AF9600321DB3 /* Section.swift */; };
+		A486B5692AA8BF9900321DB3 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5682AA8BF9900321DB3 /* ProfileCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,10 @@
 		A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		A486B55D2AA7698A00321DB3 /* UIFont+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+ext.swift"; sourceTree = "<group>"; };
+		A486B5612AA79B0F00321DB3 /* MayProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MayProfileView.swift; sourceTree = "<group>"; };
+		A486B5632AA79B1D00321DB3 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		A486B5662AA8AF9600321DB3 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		A486B5682AA8BF9900321DB3 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +130,7 @@
 		4C3862B92A758A98005C9C3B /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A486B5652AA8AF8800321DB3 /* Model */,
 				A486B5602AA79A4E00321DB3 /* MainView */,
 				A486B55F2AA7986400321DB3 /* MyProfile */,
 			);
@@ -141,6 +150,8 @@
 		A486B55F2AA7986400321DB3 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
+				A486B5612AA79B0F00321DB3 /* MayProfileView.swift */,
+				A486B5632AA79B1D00321DB3 /* MyProfileViewController.swift */,
 			);
 			path = MyProfile;
 			sourceTree = "<group>";
@@ -152,6 +163,15 @@
 				A486B5542AA7640A00321DB3 /* MainView.swift */,
 			);
 			path = MainView;
+			sourceTree = "<group>";
+		};
+		A486B5652AA8AF8800321DB3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A486B5662AA8AF9600321DB3 /* Section.swift */,
+				A486B5682AA8BF9900321DB3 /* ProfileCell.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,12 +248,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A486B5642AA79B1D00321DB3 /* MyProfileViewController.swift in Sources */,
 				4C3862A82A758819005C9C3B /* MainViewController.swift in Sources */,
 				A486B5552AA7640A00321DB3 /* MainView.swift in Sources */,
+				A486B5622AA79B0F00321DB3 /* MayProfileView.swift in Sources */,
+				A486B5672AA8AF9600321DB3 /* Section.swift in Sources */,
 				4C33FF352A75A4550002E765 /* DS+Colors.swift in Sources */,
 				4C33FF332A75A3F40002E765 /* DS.swift in Sources */,
 				A486B55E2AA7698A00321DB3 /* UIFont+ext.swift in Sources */,
 				4C33FF2E2A75A2640002E765 /* UIColor+ext.swift in Sources */,
+				A486B5692AA8BF9900321DB3 /* ProfileCell.swift in Sources */,
 				4C3862A42A758819005C9C3B /* AppDelegate.swift in Sources */,
 				4C3862A62A758819005C9C3B /* SceneDelegate.swift in Sources */,
 			);
