@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct ProfileCell {
+struct Cell {
     var title: String
-    var detais: String
 }

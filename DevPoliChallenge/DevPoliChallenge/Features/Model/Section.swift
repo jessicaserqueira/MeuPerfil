@@ -11,5 +11,5 @@ import Foundation
 struct Section {
     var title: String
     var numberOfRows: Int
-    var cells: [ProfileCell]
+    var cells: [Cell]
 }

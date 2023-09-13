@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: MainViewDelegate {
     func showMyProfile() {
-        let VC = MyProfileViewController()
+        let VC = ProfileViewController()
         navigationController?.pushViewController(VC, animated: true)
     }
 }
