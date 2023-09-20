@@ -10,13 +10,14 @@ import Foundation
 
 protocol ProfileViewModelDelegate: AnyObject {
     func didSelectProfileImage(_ imageData: Data)
+    func showWebViewController(withURL: URL)
 }
 
 class ProfileViewModel {
     
     weak var delegate: ProfileViewModelDelegate?
-    
     var userProfileImageURL: URL?
+    var urls = URLS()
     
     func selectProfileImage(_ image: Data) {
         saveImageToLocalDirectory(image)

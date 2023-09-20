@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import WebKit
 
 protocol ProfileViewDelegate: AnyObject {
     func didTapCameraIcon()
+    func didTapTermsOfUseURL()
+    func didTapPrivacyPolicyURL()
+    func didTapFrequentlyAskedQuestionsURL()
 }
 
-class ProfileView: UIView {
+class ProfileView: UIView, WKNavigationDelegate {
     
     weak var delegate: ProfileViewDelegate?
     
@@ -32,7 +36,7 @@ class ProfileView: UIView {
             Cell(title: "Dúvidas frequentes")
         ]),
     ]
-
+    
     var selectedImage: UIImage? {
         didSet {
             profileImage.image = selectedImage
@@ -157,7 +161,7 @@ class ProfileView: UIView {
     }
 }
 
-extension ProfileView: UITableViewDataSource{
+extension ProfileView: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
@@ -173,9 +177,10 @@ extension ProfileView: UITableViewDataSource{
         cell.textLabel?.text = cellData.title
         cell.textLabel?.font = UIFont.roboto(ofSize: 18, weight: .regular)
         cell.detailTextLabel?.text = cellData.title
+        
         return cell
     }
-     
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         let label = UILabel()
@@ -187,8 +192,17 @@ extension ProfileView: UITableViewDataSource{
         label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 22).isActive = true
         return headerView
     }
-}
-
-extension ProfileView: UITableViewDelegate {
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = sections[indexPath.section]
+        let cellData = section.cells[indexPath.row]
+        
+        if cellData.title == "Termos de uso" {
+            delegate?.didTapTermsOfUseURL()
+        } else if cellData.title == "Política de privacidade" {
+            delegate?.didTapPrivacyPolicyURL()
+        } else if cellData.title == "Dúvidas frequentes" {
+            delegate?.didTapFrequentlyAskedQuestionsURL()
+        }
+    }
 }

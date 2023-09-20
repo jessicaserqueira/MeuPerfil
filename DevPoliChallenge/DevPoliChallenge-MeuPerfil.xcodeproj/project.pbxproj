@@ -15,7 +15,7 @@
 		4C3862A82A758819005C9C3B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3862A72A758819005C9C3B /* MainViewController.swift */; };
 		4C3862AD2A75881C005C9C3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3862AC2A75881C005C9C3B /* Assets.xcassets */; };
 		4C3862B02A75881C005C9C3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3862AE2A75881C005C9C3B /* LaunchScreen.storyboard */; };
-		A486B5552AA7640A00321DB3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5542AA7640A00321DB3 /* MainView.swift */; };
+		A426DD6B2AB349600070B344 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A426DD6A2AB349600070B344 /* WebViewController.swift */; };
 		A486B55A2AA767BD00321DB3 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5572AA767BC00321DB3 /* Roboto-Regular.ttf */; };
 		A486B55B2AA767BD00321DB3 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */; };
 		A486B55C2AA767BD00321DB3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */; };
@@ -24,6 +24,8 @@
 		A486B5642AA79B1D00321DB3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5632AA79B1D00321DB3 /* ProfileViewController.swift */; };
 		A486B5672AA8AF9600321DB3 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5662AA8AF9600321DB3 /* Section.swift */; };
 		A486B5692AA8BF9900321DB3 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A486B5682AA8BF9900321DB3 /* ProfileCell.swift */; };
+		A4A1E2012AB38E1A00DBEF46 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1E2002AB38E1A00DBEF46 /* MainView.swift */; };
+		A4A1E2032AB38EE400DBEF46 /* URLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1E2022AB38EE400DBEF46 /* URLS.swift */; };
 		A4CB397A2AB0AAB700828A33 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CB39792AB0AAB700828A33 /* ProfileViewModel.swift */; };
 		A4CB397C2AB0AF6500828A33 /* ProfileViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CB397B2AB0AF6500828A33 /* ProfileViewState.swift */; };
 /* End PBXBuildFile section */
@@ -40,7 +42,7 @@
 		4C3862AC2A75881C005C9C3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C3862AF2A75881C005C9C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C3862B12A75881C005C9C3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A486B5542AA7640A00321DB3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A426DD6A2AB349600070B344 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		A486B5572AA767BC00321DB3 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		A486B5632AA79B1D00321DB3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A486B5662AA8AF9600321DB3 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		A486B5682AA8BF9900321DB3 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		A4A1E2002AB38E1A00DBEF46 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A4A1E2022AB38EE400DBEF46 /* URLS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLS.swift; sourceTree = "<group>"; };
 		A4CB39792AB0AAB700828A33 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		A4CB397B2AB0AF6500828A33 /* ProfileViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,9 +140,18 @@
 			children = (
 				A486B5652AA8AF8800321DB3 /* Model */,
 				A486B5602AA79A4E00321DB3 /* MainView */,
+				A426DD692AB3492B0070B344 /* WebView */,
 				A486B55F2AA7986400321DB3 /* MyProfile */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		A426DD692AB3492B0070B344 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				A426DD6A2AB349600070B344 /* WebViewController.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		A486B5562AA7678300321DB3 /* Fonts */ = {
@@ -164,8 +177,8 @@
 		A486B5602AA79A4E00321DB3 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				A4A1E2002AB38E1A00DBEF46 /* MainView.swift */,
 				4C3862A72A758819005C9C3B /* MainViewController.swift */,
-				A486B5542AA7640A00321DB3 /* MainView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -176,6 +189,7 @@
 				A486B5662AA8AF9600321DB3 /* Section.swift */,
 				A486B5682AA8BF9900321DB3 /* ProfileCell.swift */,
 				A4CB397B2AB0AF6500828A33 /* ProfileViewState.swift */,
+				A4A1E2022AB38EE400DBEF46 /* URLS.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,17 +271,19 @@
 				A4CB397C2AB0AF6500828A33 /* ProfileViewState.swift in Sources */,
 				A486B5642AA79B1D00321DB3 /* ProfileViewController.swift in Sources */,
 				4C3862A82A758819005C9C3B /* MainViewController.swift in Sources */,
-				A486B5552AA7640A00321DB3 /* MainView.swift in Sources */,
 				A486B5622AA79B0F00321DB3 /* ProfileView.swift in Sources */,
 				A486B5672AA8AF9600321DB3 /* Section.swift in Sources */,
 				A4CB397A2AB0AAB700828A33 /* ProfileViewModel.swift in Sources */,
 				4C33FF352A75A4550002E765 /* DS+Colors.swift in Sources */,
+				A4A1E2032AB38EE400DBEF46 /* URLS.swift in Sources */,
 				4C33FF332A75A3F40002E765 /* DS.swift in Sources */,
+				A4A1E2012AB38E1A00DBEF46 /* MainView.swift in Sources */,
 				A486B55E2AA7698A00321DB3 /* UIFont+ext.swift in Sources */,
 				4C33FF2E2A75A2640002E765 /* UIColor+ext.swift in Sources */,
 				A486B5692AA8BF9900321DB3 /* ProfileCell.swift in Sources */,
 				4C3862A42A758819005C9C3B /* AppDelegate.swift in Sources */,
 				4C3862A62A758819005C9C3B /* SceneDelegate.swift in Sources */,
+				A426DD6B2AB349600070B344 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
