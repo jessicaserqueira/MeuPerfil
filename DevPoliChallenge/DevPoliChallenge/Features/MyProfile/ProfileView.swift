@@ -14,6 +14,11 @@ protocol ProfileViewDelegate: AnyObject {
     func didTapTermsOfUseURL()
     func didTapPrivacyPolicyURL()
     func didTapFrequentlyAskedQuestionsURL()
+    func didTapPersonalData()
+    func didTapAdresses()
+    func didTaoCards()
+    func didTapMyRequests()
+    func didTapExtract()
 }
 
 class ProfileView: UIView, WKNavigationDelegate {
@@ -197,12 +202,25 @@ extension ProfileView: UITableViewDataSource, UITableViewDelegate {
         let section = sections[indexPath.section]
         let cellData = section.cells[indexPath.row]
         
-        if cellData.title == "Termos de uso" {
+        switch cellData.title {
+        case "Dados pessoais":
+            delegate?.didTapPersonalData()
+        case "Endereços":
+            delegate?.didTapAdresses()
+        case "Cartões":
+            delegate?.didTaoCards()
+        case "Meus pedidos":
+            delegate?.didTapMyRequests()
+        case "Extrato":
+            delegate?.didTapExtract()
+        case "Termos de uso":
             delegate?.didTapTermsOfUseURL()
-        } else if cellData.title == "Política de privacidade" {
+        case  "Política de privacidade":
             delegate?.didTapPrivacyPolicyURL()
-        } else if cellData.title == "Dúvidas frequentes" {
+        case "Dúvidas frequentes":
             delegate?.didTapFrequentlyAskedQuestionsURL()
+        default:
+            break
         }
     }
 }
