@@ -25,6 +25,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         view = webView
         
         webView.allowsBackForwardNavigationGestures = true
+        webView.translatesAutoresizingMaskIntoConstraints = true
         
         if let webURL = webURL {
             webView.load(URLRequest(url: webURL))
