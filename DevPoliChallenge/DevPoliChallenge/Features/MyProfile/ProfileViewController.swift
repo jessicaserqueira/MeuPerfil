@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import WebKit
 
 class ProfileViewController: UIViewController {
+    var webView: WKWebView!
     
     var customView = ProfileView()
     var viewModel = ProfileViewModel()
+    var webViewController = WebViewController()
+    var urls = URLS()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,15 +39,9 @@ class ProfileViewController: UIViewController {
         view = customView
         customView.delegate = self
         customView.backgroundColor = .white
-        viewModel.delegate = self
         
+        viewModel.delegate = self
         viewModel.loadUserProfileImageData()
-    }
-}
-
-extension ProfileViewController:  ProfileViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    func didTapCameraIcon() {
-        showImagePicker()
     }
     
     func showImagePicker() {
@@ -62,10 +60,40 @@ extension ProfileViewController:  ProfileViewDelegate, UIImagePickerControllerDe
     }
 }
 
+extension ProfileViewController:  ProfileViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func didTapCameraIcon() {
+        showImagePicker()
+    }
+    
+    func didTapTermsOfUseURL() {
+        if let url = viewModel.urls.termsOfUseURL {
+            showWebViewController(withURL: url)
+        }
+    }
+    
+    func didTapPrivacyPolicyURL() {
+        if let url = urls.privacyPolicyURL {
+            showWebViewController(withURL: url)
+        }
+    }
+    
+    func didTapFrequentlyAskedQuestionsURL() {
+        if let url = viewModel.urls.frequentlyAskedQuestionsURL {
+            showWebViewController(withURL: url)
+        }
+    }
+}
+
 extension ProfileViewController: ProfileViewModelDelegate {
     func didSelectProfileImage(_ imageData: Data) {
         if let image = UIImage(data: imageData) {
             customView.selectedImage = image
         }
+    }
+    
+    func showWebViewController(withURL url: URL) {
+        let webViewController = WebViewController()
+        webViewController.webURL = url
+        navigationController?.pushViewController(webViewController, animated: true)
     }
 }
