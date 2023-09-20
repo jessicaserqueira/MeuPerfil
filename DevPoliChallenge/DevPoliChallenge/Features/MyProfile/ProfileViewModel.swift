@@ -10,7 +10,8 @@ import Foundation
 
 protocol ProfileViewModelDelegate: AnyObject {
     func didSelectProfileImage(_ imageData: Data)
-    func showWebViewController(withURL: URL)
+    func showWebViewController(url: URL?)
+    func showController(withTitle title: String)
 }
 
 class ProfileViewModel {

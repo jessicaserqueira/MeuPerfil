@@ -16,6 +16,7 @@
 		4C3862AD2A75881C005C9C3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3862AC2A75881C005C9C3B /* Assets.xcassets */; };
 		4C3862B02A75881C005C9C3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3862AE2A75881C005C9C3B /* LaunchScreen.storyboard */; };
 		A426DD6B2AB349600070B344 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A426DD6A2AB349600070B344 /* WebViewController.swift */; };
+		A42DF0332ABB6DD000BDF7F3 /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DF0322ABB6DD000BDF7F3 /* SectionViewController.swift */; };
 		A486B55A2AA767BD00321DB3 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5572AA767BC00321DB3 /* Roboto-Regular.ttf */; };
 		A486B55B2AA767BD00321DB3 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */; };
 		A486B55C2AA767BD00321DB3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */; };
@@ -43,6 +44,7 @@
 		4C3862AF2A75881C005C9C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C3862B12A75881C005C9C3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A426DD6A2AB349600070B344 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		A42DF0322ABB6DD000BDF7F3 /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		A486B5572AA767BC00321DB3 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		A486B5582AA767BC00321DB3 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		A486B5592AA767BD00321DB3 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -140,8 +142,9 @@
 			children = (
 				A486B5652AA8AF8800321DB3 /* Model */,
 				A486B5602AA79A4E00321DB3 /* MainView */,
-				A426DD692AB3492B0070B344 /* WebView */,
 				A486B55F2AA7986400321DB3 /* MyProfile */,
+				A426DD692AB3492B0070B344 /* WebView */,
+				A42DF0322ABB6DD000BDF7F3 /* SectionViewController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				A486B5642AA79B1D00321DB3 /* ProfileViewController.swift in Sources */,
 				4C3862A82A758819005C9C3B /* MainViewController.swift in Sources */,
 				A486B5622AA79B0F00321DB3 /* ProfileView.swift in Sources */,
+				A42DF0332ABB6DD000BDF7F3 /* SectionViewController.swift in Sources */,
 				A486B5672AA8AF9600321DB3 /* Section.swift in Sources */,
 				A4CB397A2AB0AAB700828A33 /* ProfileViewModel.swift in Sources */,
 				4C33FF352A75A4550002E765 /* DS+Colors.swift in Sources */,

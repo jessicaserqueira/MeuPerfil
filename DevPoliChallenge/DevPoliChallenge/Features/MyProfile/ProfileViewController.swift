@@ -61,26 +61,40 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController:  ProfileViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func didTapPersonalData() {
+        showController(withTitle: "Dados Pessoais")
+    }
+    
+    func didTapAdresses() {
+        showController(withTitle: "Endereços")
+    }
+    
+    func didTaoCards() {
+        showController(withTitle: "Cartões")
+    }
+    
+    func didTapMyRequests() {
+        showController(withTitle: "Meus Pedidos")
+    }
+    
+    func didTapExtract() {
+        showController(withTitle: "Extrato")
+    }
+    
     func didTapCameraIcon() {
         showImagePicker()
     }
     
     func didTapTermsOfUseURL() {
-        if let url = viewModel.urls.termsOfUseURL {
-            showWebViewController(withURL: url)
-        }
+        showWebViewController(url: viewModel.urls.termsOfUseURL)
     }
     
     func didTapPrivacyPolicyURL() {
-        if let url = urls.privacyPolicyURL {
-            showWebViewController(withURL: url)
-        }
+        showWebViewController(url:viewModel.urls.privacyPolicyURL)
     }
     
     func didTapFrequentlyAskedQuestionsURL() {
-        if let url = viewModel.urls.frequentlyAskedQuestionsURL {
-            showWebViewController(withURL: url)
-        }
+        showWebViewController(url: viewModel.urls.frequentlyAskedQuestionsURL)
     }
 }
 
@@ -91,9 +105,16 @@ extension ProfileViewController: ProfileViewModelDelegate {
         }
     }
     
-    func showWebViewController(withURL url: URL) {
-        let webViewController = WebViewController()
-        webViewController.webURL = url
-        navigationController?.pushViewController(webViewController, animated: true)
+    func showWebViewController(url: URL?) {
+        guard let url = url else { return }
+        let vc = WebViewController()
+        vc.webURL = url
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showController(withTitle title: String) {
+        let vc = SectionViewController()
+        vc.title = title
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
