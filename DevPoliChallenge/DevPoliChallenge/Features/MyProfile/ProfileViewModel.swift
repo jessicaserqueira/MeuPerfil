@@ -9,9 +9,11 @@
 import Foundation
 
 protocol ProfileViewModelDelegate: AnyObject {
-    func didSelectProfileImage(_ imageData: Data)
+    func didSelectProfileImage(_ imageData: Data?)
     func showWebViewController(url: URL?)
     func showController(withTitle title: String)
+    func showImagePicker()
+    func didRemoveProfileImage()
 }
 
 class ProfileViewModel {
@@ -36,7 +38,7 @@ class ProfileViewModel {
                 saveUserProfileImageURL(url: fileURL)
                 delegate?.didSelectProfileImage(image)
             } catch {
-                print("Erro ao salvar a imagem: \(error)")
+                print("Error saving image: \(error)")
             }
         }
     }
@@ -49,21 +51,63 @@ class ProfileViewModel {
     }
     
     func loadUserProfileImageURL() -> URL? {
-        if let savedURL = UserDefaults.standard.url(forKey: "userProfileImageURL") {
-            return savedURL
-        }
-        return nil
+        return UserDefaults.standard.url(forKey: "userProfileImageURL")
     }
     
-    func saveUserProfileImageURL(url: URL) {
+    func saveUserProfileImageURL(url: URL?) {
         UserDefaults.standard.set(url, forKey: "userProfileImageURL")
         UserDefaults.standard.synchronize()
     }
     
     func loadUserProfileImageData() {
-        if let imageURL = loadUserProfileImageURL(),
-           let imageData = try? Data(contentsOf: imageURL) {
-            delegate?.didSelectProfileImage(imageData)
+        if userProfileImageURL == nil {
+            if let imageURL = loadUserProfileImageURL(),
+               FileManager.default.fileExists(atPath: imageURL.path),
+               let imageData = try? Data(contentsOf: imageURL) {
+                userProfileImageURL = imageURL
+                delegate?.didSelectProfileImage(imageData)
+            } 
         }
+    }
+    
+    func removeProfileImage() {
+        if let imageURL = userProfileImageURL {
+            do {
+                try FileManager.default.removeItem(at: imageURL)
+                userProfileImageURL = nil
+                saveUserProfileImageURL(url: nil)
+                delegate?.didRemoveProfileImage()
+            } catch {
+                print("Error removing image: \(error)")
+            }
+        }
+    }
+    
+    func performAction(_ option: ProfileMenuOption) {
+        let title: String
+        
+        switch option {
+        case .personalData:
+            title = "Dados Pessoais"
+        case .addresses:
+            title = "Endereços"
+        case .cards:
+            title = "Cartões"
+        case .myRequests:
+            title = "Meus Pedidos"
+        case .extract:
+            title = "Extrato"
+        case .termsOfUse:
+            delegate?.showWebViewController(url: urls.termsOfUseURL)
+            return
+        case .privacyPolicy:
+            delegate?.showWebViewController(url: urls.privacyPolicyURL)
+            return
+        case .faq:
+            delegate?.showWebViewController(url: urls.frequentlyAskedQuestionsURL)
+            return
+        }
+        
+        delegate?.showController(withTitle: title)
     }
 }

@@ -11,5 +11,11 @@ import Foundation
 struct Section {
     var title: String
     var numberOfRows: Int
-    var cells: [Cell]
+    var cells: [ProfileMenuOption]
+    
+    init(title: String, numberOfRows: Int, cells: [ProfileMenuOption]) {
+        self.title = title
+        self.numberOfRows = numberOfRows
+        self.cells = cells
+    }
 }

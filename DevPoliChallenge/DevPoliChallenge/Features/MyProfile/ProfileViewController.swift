@@ -10,17 +10,26 @@ import UIKit
 import WebKit
 
 class ProfileViewController: UIViewController {
-    var webView: WKWebView!
-    
     var customView = ProfileView()
     var viewModel = ProfileViewModel()
-    var webViewController = WebViewController()
-    var urls = URLS()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        setupNavigationBar()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view = customView
+        customView.delegate = self
+        customView.backgroundColor = .white
         
+        viewModel.delegate = self
+        viewModel.loadUserProfileImageData()
+    }
+    
+    func setupNavigationBar() {
         let backButton = UIBarButtonItem (
             image: UIImage(named: "left"),
             style: .plain,
@@ -34,17 +43,30 @@ class ProfileViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view = customView
-        customView.delegate = self
-        customView.backgroundColor = .white
+    func showImagePicker() {
+        let actions = [
+            UIAlertAction(title: "Alterar Imagem", style: .default) { [weak self] _ in
+                self?.presentImagePicker()
+            },
+            UIAlertAction(title: "Remover Imagem", style: .destructive) { [weak self] _ in
+                self?.removeProfileImage()
+            }
+        ]
         
-        viewModel.delegate = self
-        viewModel.loadUserProfileImageData()
+        UIAlertController.showActionSheet(
+            from: self,
+            title: "Escolha uma opção",
+            message: nil,
+            actions: actions
+        )
     }
     
-    func showImagePicker() {
+    func removeProfileImage() {
+        customView.selectedImage = nil
+        viewModel.removeProfileImage()
+    }
+    
+    func presentImagePicker() {
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
@@ -60,50 +82,28 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController:  ProfileViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    func didTapPersonalData() {
-        showController(withTitle: "Dados Pessoais")
-    }
-    
-    func didTapAdresses() {
-        showController(withTitle: "Endereços")
-    }
-    
-    func didTaoCards() {
-        showController(withTitle: "Cartões")
-    }
-    
-    func didTapMyRequests() {
-        showController(withTitle: "Meus Pedidos")
-    }
-    
-    func didTapExtract() {
-        showController(withTitle: "Extrato")
-    }
-    
+extension ProfileViewController:  ProfileViewDelegate {
     func didTapCameraIcon() {
         showImagePicker()
     }
     
-    func didTapTermsOfUseURL() {
-        showWebViewController(url: viewModel.urls.termsOfUseURL)
-    }
-    
-    func didTapPrivacyPolicyURL() {
-        showWebViewController(url:viewModel.urls.privacyPolicyURL)
-    }
-    
-    func didTapFrequentlyAskedQuestionsURL() {
-        showWebViewController(url: viewModel.urls.frequentlyAskedQuestionsURL)
+    func didTapProfileMenuOption(_ option: ProfileMenuOption) {
+        viewModel.performAction(option)
     }
 }
 
-extension ProfileViewController: ProfileViewModelDelegate {
-    func didSelectProfileImage(_ imageData: Data) {
-        if let image = UIImage(data: imageData) {
-            customView.selectedImage = image
-        }
+extension ProfileViewController: ProfileViewModelDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func didRemoveProfileImage() {
+        customView.updateProfileImage(image: UIImage(named: "no-image"))
     }
+    
+    func didSelectProfileImage(_ imageData: Data?) {
+        if let imageData = imageData,
+            let image = UIImage(data: imageData) {
+            customView.updateProfileImage(image: image)
+
+         }
+     }
     
     func showWebViewController(url: URL?) {
         guard let url = url else { return }
