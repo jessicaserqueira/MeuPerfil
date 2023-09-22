@@ -7,38 +7,32 @@
 //
 
 import UIKit
-import WebKit
 
 protocol ProfileViewDelegate: AnyObject {
     func didTapCameraIcon()
-    func didTapTermsOfUseURL()
-    func didTapPrivacyPolicyURL()
-    func didTapFrequentlyAskedQuestionsURL()
-    func didTapPersonalData()
-    func didTapAdresses()
-    func didTaoCards()
-    func didTapMyRequests()
-    func didTapExtract()
+    func didTapProfileMenuOption(_ option: ProfileMenuOption)
 }
 
-class ProfileView: UIView, WKNavigationDelegate {
+// MARK: - ProfileView
+
+class ProfileView: UIView {
     
     weak var delegate: ProfileViewDelegate?
     
     let sections: [Section] = [
         Section(title: "MINHA CONTA", numberOfRows: 3, cells: [
-            Cell(title: "Dados pessoais"),
-            Cell(title: "Endereços"),
-            Cell(title: "Cartões")
+            .personalData,
+            .addresses,
+            .cards
         ]),
         Section(title: "PEDIDOS", numberOfRows: 2, cells: [
-            Cell(title: "Meus pedidos"),
-            Cell(title: "Extrato")
+            .myRequests,
+            .extract
         ]),
         Section(title: "AJUDA", numberOfRows: 3, cells: [
-            Cell(title: "Termos de uso"),
-            Cell(title: "Política de privacidade"),
-            Cell(title: "Dúvidas frequentes")
+            .termsOfUse,
+            .privacyPolicy,
+            .faq
         ]),
     ]
     
@@ -164,7 +158,13 @@ class ProfileView: UIView, WKNavigationDelegate {
     @objc func buttonIconTapped() {
         delegate?.didTapCameraIcon()
     }
+    
+    func updateProfileImage(image: UIImage?) {
+        profileImage.image = image
+    }
 }
+
+// MARK: - UITableViewDataSource and UITableViewDelegate
 
 extension ProfileView: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -179,9 +179,9 @@ extension ProfileView: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         let section = sections[indexPath.section]
         let cellData = section.cells[indexPath.row]
-        cell.textLabel?.text = cellData.title
+        cell.textLabel?.text = cellData.rawValue
         cell.textLabel?.font = UIFont.roboto(ofSize: 18, weight: .regular)
-        cell.detailTextLabel?.text = cellData.title
+        cell.detailTextLabel?.text = cellData.rawValue
         
         return cell
     }
@@ -202,25 +202,11 @@ extension ProfileView: UITableViewDataSource, UITableViewDelegate {
         let section = sections[indexPath.section]
         let cellData = section.cells[indexPath.row]
         
-        switch cellData.title {
-        case "Dados pessoais":
-            delegate?.didTapPersonalData()
-        case "Endereços":
-            delegate?.didTapAdresses()
-        case "Cartões":
-            delegate?.didTaoCards()
-        case "Meus pedidos":
-            delegate?.didTapMyRequests()
-        case "Extrato":
-            delegate?.didTapExtract()
-        case "Termos de uso":
-            delegate?.didTapTermsOfUseURL()
-        case  "Política de privacidade":
-            delegate?.didTapPrivacyPolicyURL()
-        case "Dúvidas frequentes":
-            delegate?.didTapFrequentlyAskedQuestionsURL()
-        default:
-            break
+        if let option = ProfileMenuOption(rawValue: cellData.rawValue) {
+            switch option {
+            case .personalData, .addresses, .cards, .myRequests, .extract, .termsOfUse, .privacyPolicy, .faq:
+                delegate?.didTapProfileMenuOption(option)
+            }
         }
     }
 }
