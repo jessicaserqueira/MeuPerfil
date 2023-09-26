@@ -14,6 +14,7 @@ protocol ProfileViewModelDelegate: AnyObject {
     func showController(withTitle title: String)
     func showImagePicker()
     func didRemoveProfileImage()
+    func didLogout()
 }
 
 class ProfileViewModel {
@@ -21,6 +22,8 @@ class ProfileViewModel {
     weak var delegate: ProfileViewModelDelegate?
     var userProfileImageURL: URL?
     var urls = URLS()
+    var isSessionClosed = false
+    var logoutAction: (() -> Void)?
     
     func selectProfileImage(_ image: Data) {
         saveImageToLocalDirectory(image)
@@ -107,7 +110,10 @@ class ProfileViewModel {
             delegate?.showWebViewController(url: urls.frequentlyAskedQuestionsURL)
             return
         }
-        
         delegate?.showController(withTitle: title)
+    }
+    
+    func logout() {
+        delegate?.didLogout()
     }
 }

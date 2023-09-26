@@ -11,12 +11,11 @@ import UIKit
 protocol ProfileViewDelegate: AnyObject {
     func didTapCameraIcon()
     func didTapProfileMenuOption(_ option: ProfileMenuOption)
+    func didTapLogout()
 }
 
-// MARK: - ProfileView
-
 class ProfileView: UIView {
-    
+    var isSessionClosed = false
     weak var delegate: ProfileViewDelegate?
     
     let sections: [Section] = [
@@ -33,7 +32,7 @@ class ProfileView: UIView {
             .termsOfUse,
             .privacyPolicy,
             .faq
-        ]),
+        ])
     ]
     
     var selectedImage: UIImage? {
@@ -41,6 +40,18 @@ class ProfileView: UIView {
             profileImage.image = selectedImage
         }
     }
+    private lazy var scrollView: UIScrollView = {
+        let container = UIScrollView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.accessibilityIdentifier = "ProfileView.containerImage"
+        addSubview(container)
+        container.addSubview(imageContainer)
+        container.addSubview(labelName)
+        container.addSubview(tableView)
+        container.addSubview(view)
+        
+        return container
+    }()
     
     private lazy var imageContainer: UIView = {
         let container = UIView()
@@ -95,6 +106,7 @@ class ProfileView: UIView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = DesignSystem.Colors.background
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -104,9 +116,42 @@ class ProfileView: UIView {
         return tableView
     }()
     
+    private lazy var view: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = "ProfileView.view"
+        view.addSubview(footerView)
+        return  view
+    }()
+    
+    private lazy var footerView: FooterView = {
+        let footerView = FooterView()
+        let view = UIView()
+        view.backgroundColor = DesignSystem.Colors.background
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.accessibilityIdentifier = "ProfileView.footerView"
+        
+        return footerView
+    }()
+    
+    private lazy var closedButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Encerrar Sessão", for: .normal)
+        button.titleLabel?.font = UIFont.roboto(ofSize: 18, weight: .bold)
+        button.backgroundColor = DesignSystem.Colors.backgroundButton
+        button.contentMode = .scaleAspectFill
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "ProfileView.closedButton"
+        button.addTarget(self, action: #selector(closedButtonTapped), for: .touchUpInside)
+        scrollView.addSubview(button)
+        return button
+    }()
+    
     //MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupConstraints()
         setupActions()
     }
@@ -118,6 +163,11 @@ class ProfileView: UIView {
     //MARK: - Constraints
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
             imageContainer.topAnchor.constraint(equalTo: topAnchor, constant: 100),
             imageContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
             imageContainer.widthAnchor.constraint(equalToConstant: 150),
@@ -139,14 +189,28 @@ class ProfileView: UIView {
             buttonIcon.widthAnchor.constraint(equalToConstant: 24),
             
             labelName.topAnchor.constraint(equalTo: imageContainer.bottomAnchor, constant: 11),
-            labelName.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
+            labelName.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             tableView.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: closedButton.topAnchor, constant: -10),
+            
+            closedButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            closedButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            closedButton.heightAnchor.constraint(equalToConstant: 70.0),
+            
+            view.topAnchor.constraint(equalTo: closedButton.bottomAnchor, constant: 10),
+            view.heightAnchor.constraint(equalToConstant: 150),
+            view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            
+            footerView.topAnchor.constraint(equalTo: view.topAnchor),
+            footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
     }
     
     //MARK: - Actions
@@ -157,6 +221,10 @@ class ProfileView: UIView {
     
     @objc func buttonIconTapped() {
         delegate?.didTapCameraIcon()
+    }
+    
+    @objc func closedButtonTapped() {
+        delegate?.didTapLogout()
     }
     
     func updateProfileImage(image: UIImage?) {
@@ -179,6 +247,7 @@ extension ProfileView: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         let section = sections[indexPath.section]
         let cellData = section.cells[indexPath.row]
+        cell.backgroundColor = DesignSystem.Colors.background
         cell.textLabel?.text = cellData.rawValue
         cell.textLabel?.font = UIFont.roboto(ofSize: 18, weight: .regular)
         cell.detailTextLabel?.text = cellData.rawValue
@@ -205,7 +274,7 @@ extension ProfileView: UITableViewDataSource, UITableViewDelegate {
         if let option = ProfileMenuOption(rawValue: cellData.rawValue) {
             switch option {
             case .personalData, .addresses, .cards, .myRequests, .extract, .termsOfUse, .privacyPolicy, .faq:
-                delegate?.didTapProfileMenuOption(option)
+                delegate?.didTapProfileMenuOption(option)                
             }
         }
     }

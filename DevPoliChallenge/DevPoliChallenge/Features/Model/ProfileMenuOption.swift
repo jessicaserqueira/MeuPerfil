@@ -17,4 +17,5 @@ enum ProfileMenuOption: String {
     case termsOfUse = "Termos de uso"
     case privacyPolicy = "Política de privacidade"
     case faq = "Dúvidas frequentes"
+
 }
