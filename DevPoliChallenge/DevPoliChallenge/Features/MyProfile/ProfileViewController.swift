@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import WebKit
 
 class ProfileViewController: UIViewController {
     var customView = ProfileView()
@@ -23,7 +22,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view = customView
         customView.delegate = self
-        customView.backgroundColor = .white
+        customView.backgroundColor = DesignSystem.Colors.background
         
         viewModel.delegate = self
         viewModel.loadUserProfileImageData()
@@ -50,7 +49,9 @@ class ProfileViewController: UIViewController {
             },
             UIAlertAction(title: "Remover Imagem", style: .destructive) { [weak self] _ in
                 self?.removeProfileImage()
-            }
+            },
+            UIAlertAction(title: "Cancelar", style: .cancel)
+            
         ]
         
         UIAlertController.showActionSheet(
@@ -80,9 +81,31 @@ class ProfileViewController: UIViewController {
         }
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    func showLogoutAlert() {
+        let alertTitle = "Encerrar Sessão"
+        let alertMessage = "Tem certeza de que deseja encerrar a sessão?"
+        
+        let confirmAction = UIAlertAction(title: "Sim", style: .destructive) { [weak self] _ in
+            self?.viewModel.logout()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel)
+        
+        UIAlertController.showActionSheet(
+            from: self,
+            title: alertTitle,
+            message: alertMessage,
+            actions: [confirmAction, cancelAction]
+        )
+    }
 }
 
 extension ProfileViewController:  ProfileViewDelegate {
+    func didTapLogout() {
+        showLogoutAlert()
+    }
+    
     func didTapCameraIcon() {
         showImagePicker()
     }
@@ -93,6 +116,14 @@ extension ProfileViewController:  ProfileViewDelegate {
 }
 
 extension ProfileViewController: ProfileViewModelDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func didLogout() {
+         let loginViewController = MainViewController()
+         let navigationController = UINavigationController(rootViewController: loginViewController)
+         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let delegate = windowScene.delegate as? SceneDelegate {
+             delegate.window?.rootViewController = navigationController
+         }
+     }
     func didRemoveProfileImage() {
         customView.updateProfileImage(image: UIImage(named: "no-image"))
     }

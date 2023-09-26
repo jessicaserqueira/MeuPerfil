@@ -10,25 +10,26 @@ import UIKit
 
 extension UIAlertController {
     static func showActionSheet<T>(
-        from controller: T,
-        title: String?,
-        message: String?,
-        actions: [UIAlertAction],
-        completion: (() -> Void)? = nil
-    ) where T: UIViewController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        
-        for action in actions {
-            alert.addAction(action)
-        }
-        
-        if let completion = completion {
-            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel) { _ in
-                completion()
-            })
-        }
-        controller.present(alert, animated: true, completion: nil)
-    }
+          from controller: T,
+          title: String?,
+          message: String?,
+          actions: [UIAlertAction],
+          completion: (() -> Void)? = nil
+      ) where T: UIViewController {
+          let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+          
+          for action in actions {
+              alert.addAction(action)
+          }
+          
+          if let completion = completion {
+              let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { _ in
+                  completion()
+              }
+              alert.addAction(cancelAction)
+          }
+          controller.present(alert, animated: true, completion: nil)
+      }
     
     static func showAlert<T>(
         from controller: T,
