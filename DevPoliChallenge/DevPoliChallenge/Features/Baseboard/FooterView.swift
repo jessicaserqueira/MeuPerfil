@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol FooterViewDelegate: AnyObject {
+    func didTapLocalPhone()
+}
+
 class FooterView: UIView {
+
+    weak var delegate: FooterViewDelegate?
     
     private let titleLabel: UILabel = createLabel(
         text: "Atendimento",
@@ -18,7 +24,7 @@ class FooterView: UIView {
     )
     
     private let phoneLocalLabel: UILabel = createLabel(
-        text: "3003-1234",
+        text: "30031234",
         font: UIFont.roboto(ofSize: 16, weight: .regular),
         textColor: DesignSystem.Colors.accent,
         accessibilityIdentifier: "FooterView.phoneLocalLabel"
@@ -32,14 +38,14 @@ class FooterView: UIView {
     )
     
     private let otherLocationsPhoneLabel: UILabel = createLabel(
-        text: "0800 123 4567",
+        text: "08001234567",
         font: UIFont.roboto(ofSize: 16, weight: .regular),
         textColor: DesignSystem.Colors.accent,
         accessibilityIdentifier: "FooterView.otherLocationsPhoneLabel"
     )
     
     private let otherLocationsLabel: UILabel = createLabel(
-        text: "(Demais localidades",
+        text: "(Demais localidades)",
         font: UIFont.roboto(ofSize: 14, weight: .regular),
         textColor: .gray,
         accessibilityIdentifier: "FooterView.otherLocationsLabel"
@@ -67,6 +73,7 @@ class FooterView: UIView {
     private lazy var stackViewPhoneLocal: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.accessibilityIdentifier = "FooterView.stackViewVersion"
         return stackView
@@ -75,6 +82,7 @@ class FooterView: UIView {
     private lazy var stackViewotherLocationsPhone: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.accessibilityIdentifier = "FooterView.stackViewVersion"
         return stackView
@@ -83,6 +91,7 @@ class FooterView: UIView {
     private lazy var stackViewVersion: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.accessibilityIdentifier = "FooterView.stackViewVersion"
         return stackView
@@ -97,7 +106,7 @@ class FooterView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
-
+    
     
     //MARK: - Initializer
     
@@ -107,8 +116,8 @@ class FooterView: UIView {
         
         setupSubviews()
         setupConstraints()
-        setupActions()
-
+        setupPhoneLabelsGestures()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -118,7 +127,7 @@ class FooterView: UIView {
     
     //MARK: - SetupViews
     private func setupSubviews() {
-
+        
         addSubview(titleLabel)
         
         addSubview(stackViewPhoneLocal)
@@ -138,8 +147,21 @@ class FooterView: UIView {
     
     //MARK: - Actions
     
-    func setupActions() {
+    @objc private func handlePhoneLocalTap() {
+        delegate?.didTapLocalPhone()
+    }
+    
+    @objc private func handleOtherLocationsPhoneTap() {
+    }
+    
+    private func setupPhoneLabelsGestures() {
+        let phoneLocalTapGesture = UITapGestureRecognizer(target: self, action: #selector(handlePhoneLocalTap))
+        phoneLocalLabel.isUserInteractionEnabled = true
+        phoneLocalLabel.addGestureRecognizer(phoneLocalTapGesture)
         
+        let otherLocationsPhoneTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleOtherLocationsPhoneTap))
+        otherLocationsPhoneLabel.isUserInteractionEnabled = true
+        otherLocationsPhoneLabel.addGestureRecognizer(otherLocationsPhoneTapGesture)
     }
     
     //MARK: - Constraints

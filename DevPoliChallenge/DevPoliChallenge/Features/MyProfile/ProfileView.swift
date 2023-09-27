@@ -201,7 +201,7 @@ class ProfileView: UIView {
             closedButton.heightAnchor.constraint(equalToConstant: 70.0),
             
             view.topAnchor.constraint(equalTo: closedButton.bottomAnchor, constant: 10),
-            view.heightAnchor.constraint(equalToConstant: 150),
+            view.heightAnchor.constraint(equalToConstant: 200),
             view.leadingAnchor.constraint(equalTo: leadingAnchor),
             view.trailingAnchor.constraint(equalTo: trailingAnchor),
             view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),

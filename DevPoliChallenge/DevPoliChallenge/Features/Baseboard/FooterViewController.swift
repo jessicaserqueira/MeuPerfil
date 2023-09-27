@@ -12,6 +12,7 @@ class FooterViewController: UIViewController {
     
     var customView = FooterView()
     var viewModel = FooterViewModel()
+    var urls = URLS()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -21,6 +22,18 @@ class FooterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = customView
+        customView.delegate = self
         customView.backgroundColor = DesignSystem.Colors.background
+    }
+}
+
+extension FooterViewController: FooterViewDelegate {
+    func didTapLocalPhone() {
+        if let phoneURL = urls.localPhone {
+            if UIApplication.shared.canOpenURL(phoneURL) {
+                UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+            } else {
+            }
+        }
     }
 }
