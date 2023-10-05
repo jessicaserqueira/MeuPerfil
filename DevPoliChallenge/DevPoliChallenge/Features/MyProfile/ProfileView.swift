@@ -12,9 +12,15 @@ protocol ProfileViewDelegate: AnyObject {
     func didTapCameraIcon()
     func didTapProfileMenuOption(_ option: ProfileMenuOption)
     func didTapLogout()
+    func didTapLocalPhone()
+    func didTapotherLocationsPhone()
+    func didTapWebview()
 }
 
 class ProfileView: UIView {
+    
+    var urls = WebURLS()
+    
     var isSessionClosed = false
     weak var delegate: ProfileViewDelegate?
     
@@ -128,6 +134,7 @@ class ProfileView: UIView {
     private lazy var footerView: FooterView = {
         let footerView = FooterView()
         let view = UIView()
+        footerView.delegate = self
         view.backgroundColor = DesignSystem.Colors.background
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.accessibilityIdentifier = "ProfileView.footerView"
@@ -151,7 +158,6 @@ class ProfileView: UIView {
     //MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupConstraints()
         setupActions()
     }
@@ -277,5 +283,19 @@ extension ProfileView: UITableViewDataSource, UITableViewDelegate {
                 delegate?.didTapProfileMenuOption(option)                
             }
         }
+    }
+}
+
+extension ProfileView: FooterViewDelegate {
+    func didTapLocalPhone() {
+        delegate?.didTapLocalPhone()
+    }
+    
+    func didTapOtherLocationsPhone() {
+        delegate?.didTapotherLocationsPhone()
+    }
+    
+    func didTapWebsite() {
+        delegate?.didTapWebview()
     }
 }

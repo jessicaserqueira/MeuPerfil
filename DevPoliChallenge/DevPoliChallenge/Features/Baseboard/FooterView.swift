@@ -10,10 +10,12 @@ import UIKit
 
 protocol FooterViewDelegate: AnyObject {
     func didTapLocalPhone()
+    func didTapOtherLocationsPhone()
+    func didTapWebsite()
 }
 
 class FooterView: UIView {
-
+    
     weak var delegate: FooterViewDelegate?
     
     private let titleLabel: UILabel = createLabel(
@@ -107,7 +109,6 @@ class FooterView: UIView {
         return label
     }
     
-    
     //MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -117,13 +118,12 @@ class FooterView: UIView {
         setupSubviews()
         setupConstraints()
         setupPhoneLabelsGestures()
-        
+        showVersionApp()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     //MARK: - SetupViews
     private func setupSubviews() {
@@ -152,6 +152,11 @@ class FooterView: UIView {
     }
     
     @objc private func handleOtherLocationsPhoneTap() {
+        delegate?.didTapOtherLocationsPhone()
+    }
+    
+    @objc private func handleWebsiteTap() {
+        delegate?.didTapWebsite()
     }
     
     private func setupPhoneLabelsGestures() {
@@ -162,6 +167,18 @@ class FooterView: UIView {
         let otherLocationsPhoneTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleOtherLocationsPhoneTap))
         otherLocationsPhoneLabel.isUserInteractionEnabled = true
         otherLocationsPhoneLabel.addGestureRecognizer(otherLocationsPhoneTapGesture)
+        
+        let websiteTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleWebsiteTap))
+        websiteLabel.isUserInteractionEnabled = true
+        websiteLabel.addGestureRecognizer(websiteTapGesture)
+    }
+    
+    func showVersionApp() {
+        let appVersion = AppInfo.appVersion
+        let buildNumber = AppInfo.buildNumber
+
+        versionLabel.text = "Versão: \(appVersion)"
+        buildLabel.text = " (\(buildNumber))"
     }
     
     //MARK: - Constraints

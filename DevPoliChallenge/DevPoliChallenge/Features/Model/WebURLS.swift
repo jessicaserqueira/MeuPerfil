@@ -8,11 +8,9 @@
 
 import Foundation
 
-struct URLS {
+struct WebURLS {
     var termsOfUseURL = URL(string: "https://www.devpoli.com/termos-de-uso")
     var privacyPolicyURL = URL(string: "https://www.devpoli.com/politica-de-privacidade")
     var frequentlyAskedQuestionsURL = URL(string: "https://www.devpoli.com/faq")
-    var webSite = URL(string:  "https://devpoli.com")
-    var localPhone = URL(string: "tel://3003123")
-    var otherPhone = URL(string: "tel://08001234567")
+    var webSite = URL(string:  "https://www.devpoli.com")
 }

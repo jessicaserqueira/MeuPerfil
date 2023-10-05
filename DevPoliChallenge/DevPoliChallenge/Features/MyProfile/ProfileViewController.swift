@@ -102,6 +102,18 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController:  ProfileViewDelegate {
+    func didTapLocalPhone() {
+        viewModel.showLocalphone()
+    }
+    
+    func didTapotherLocationsPhone() {
+        viewModel.showOtherLocationsphone()
+    }
+    
+    func didTapWebview() {
+        viewModel.showWebView()
+    }
+    
     func didTapLogout() {
         showLogoutAlert()
     }
@@ -116,6 +128,14 @@ extension ProfileViewController:  ProfileViewDelegate {
 }
 
 extension ProfileViewController: ProfileViewModelDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func openPhoneURL(url: URL?) {
+        if let phoneURL = url {
+            if UIApplication.shared.canOpenURL(phoneURL) {
+                UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
     func didLogout() {
          let loginViewController = MainViewController()
          let navigationController = UINavigationController(rootViewController: loginViewController)

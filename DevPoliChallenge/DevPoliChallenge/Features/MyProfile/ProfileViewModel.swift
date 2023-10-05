@@ -15,13 +15,16 @@ protocol ProfileViewModelDelegate: AnyObject {
     func showImagePicker()
     func didRemoveProfileImage()
     func didLogout()
+    func openPhoneURL(url: URL?)
 }
 
 class ProfileViewModel {
     
     weak var delegate: ProfileViewModelDelegate?
     var userProfileImageURL: URL?
-    var urls = URLS()
+    var urls = WebURLS()
+    var phoneURLS = PhoneURLS()
+    var isLocalPhone: Bool = true
     var isSessionClosed = false
     var logoutAction: (() -> Void)?
     
@@ -69,7 +72,7 @@ class ProfileViewModel {
                let imageData = try? Data(contentsOf: imageURL) {
                 userProfileImageURL = imageURL
                 delegate?.didSelectProfileImage(imageData)
-            } 
+            }
         }
     }
     
@@ -115,5 +118,23 @@ class ProfileViewModel {
     
     func logout() {
         delegate?.didLogout()
+    }
+    
+    func showLocalphone() {
+        if let localPhoneURL = phoneURLS.localPhone {
+            delegate?.openPhoneURL(url: localPhoneURL)
+        }
+    }
+    
+    func showOtherLocationsphone() {
+        if let otherLocationsPhoneURL = phoneURLS.otherLocationsPhone {
+            delegate?.openPhoneURL(url: otherLocationsPhoneURL)
+        }
+    }
+    
+    func showWebView() {
+        if let webViewURL = urls.webSite {
+            delegate?.showWebViewController(url: webViewURL)
+        }
     }
 }
