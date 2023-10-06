@@ -8,7 +8,15 @@
 
 import UIKit
 
+protocol FooterViewDelegate: AnyObject {
+    func didTapLocalPhone()
+    func didTapOtherLocationsPhone()
+    func didTapWebsite()
+}
+
 class FooterView: UIView {
+    
+    weak var delegate: FooterViewDelegate?
     
     private let titleLabel: UILabel = createLabel(
         text: "Atendimento",
@@ -18,7 +26,7 @@ class FooterView: UIView {
     )
     
     private let phoneLocalLabel: UILabel = createLabel(
-        text: "3003-1234",
+        text: "30031234",
         font: UIFont.roboto(ofSize: 16, weight: .regular),
         textColor: DesignSystem.Colors.accent,
         accessibilityIdentifier: "FooterView.phoneLocalLabel"
@@ -32,14 +40,14 @@ class FooterView: UIView {
     )
     
     private let otherLocationsPhoneLabel: UILabel = createLabel(
-        text: "0800 123 4567",
+        text: "08001234567",
         font: UIFont.roboto(ofSize: 16, weight: .regular),
         textColor: DesignSystem.Colors.accent,
         accessibilityIdentifier: "FooterView.otherLocationsPhoneLabel"
     )
     
     private let otherLocationsLabel: UILabel = createLabel(
-        text: "(Demais localidades",
+        text: "(Demais localidades)",
         font: UIFont.roboto(ofSize: 14, weight: .regular),
         textColor: .gray,
         accessibilityIdentifier: "FooterView.otherLocationsLabel"
@@ -51,14 +59,16 @@ class FooterView: UIView {
         textColor: DesignSystem.Colors.secondary,
         accessibilityIdentifier: "FooterView.websiteLabel"
     )
+    
     private let versionLabel: UILabel = createLabel(
-        text: "Versão: 1.0.0",
+        text: "Versão: \(AppInfo.appVersion)",
         font: UIFont.roboto(ofSize: 14, weight: .regular),
         textColor: .black,
         accessibilityIdentifier: "FooterView.websiteLabel"
     )
+    
     private let buildLabel: UILabel = createLabel(
-        text: " (12345)",
+        text: "(\(AppInfo.buildNumber))",
         font: UIFont.roboto(ofSize: 14, weight: .regular),
         textColor: .black,
         accessibilityIdentifier: "FooterView.buildLabel"
@@ -67,6 +77,7 @@ class FooterView: UIView {
     private lazy var stackViewPhoneLocal: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.accessibilityIdentifier = "FooterView.stackViewVersion"
         return stackView
@@ -75,6 +86,7 @@ class FooterView: UIView {
     private lazy var stackViewotherLocationsPhone: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.accessibilityIdentifier = "FooterView.stackViewVersion"
         return stackView
@@ -83,6 +95,7 @@ class FooterView: UIView {
     private lazy var stackViewVersion: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.accessibilityIdentifier = "FooterView.stackViewVersion"
         return stackView
@@ -97,7 +110,6 @@ class FooterView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
-
     
     //MARK: - Initializer
     
@@ -107,18 +119,16 @@ class FooterView: UIView {
         
         setupSubviews()
         setupConstraints()
-        setupActions()
-
+        setupPhoneLabelsGestures()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     //MARK: - SetupViews
     private func setupSubviews() {
-
+        
         addSubview(titleLabel)
         
         addSubview(stackViewPhoneLocal)
@@ -137,9 +147,30 @@ class FooterView: UIView {
     }
     
     //MARK: - Actions
+    @objc private func handlePhoneLocalTap() {
+        delegate?.didTapLocalPhone()
+    }
     
-    func setupActions() {
+    @objc private func handleOtherLocationsPhoneTap() {
+        delegate?.didTapOtherLocationsPhone()
+    }
+    
+    @objc private func handleWebsiteTap() {
+        delegate?.didTapWebsite()
+    }
+    
+    private func setupPhoneLabelsGestures() {
+        let phoneLocalTapGesture = UITapGestureRecognizer(target: self, action: #selector(handlePhoneLocalTap))
+        phoneLocalLabel.isUserInteractionEnabled = true
+        phoneLocalLabel.addGestureRecognizer(phoneLocalTapGesture)
         
+        let otherLocationsPhoneTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleOtherLocationsPhoneTap))
+        otherLocationsPhoneLabel.isUserInteractionEnabled = true
+        otherLocationsPhoneLabel.addGestureRecognizer(otherLocationsPhoneTapGesture)
+        
+        let websiteTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleWebsiteTap))
+        websiteLabel.isUserInteractionEnabled = true
+        websiteLabel.addGestureRecognizer(websiteTapGesture)
     }
     
     //MARK: - Constraints

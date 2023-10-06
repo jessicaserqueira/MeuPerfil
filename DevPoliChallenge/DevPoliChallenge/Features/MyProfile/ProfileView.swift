@@ -12,9 +12,15 @@ protocol ProfileViewDelegate: AnyObject {
     func didTapCameraIcon()
     func didTapProfileMenuOption(_ option: ProfileMenuOption)
     func didTapLogout()
+    func didTapLocalPhone()
+    func didTapotherLocationsPhone()
+    func didTapWebview()
 }
 
 class ProfileView: UIView {
+    
+    var urls = WebURLS()
+    
     var isSessionClosed = false
     weak var delegate: ProfileViewDelegate?
     
@@ -128,6 +134,7 @@ class ProfileView: UIView {
     private lazy var footerView: FooterView = {
         let footerView = FooterView()
         let view = UIView()
+        footerView.delegate = self
         view.backgroundColor = DesignSystem.Colors.background
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.accessibilityIdentifier = "ProfileView.footerView"
@@ -151,7 +158,6 @@ class ProfileView: UIView {
     //MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupConstraints()
         setupActions()
     }
@@ -201,7 +207,7 @@ class ProfileView: UIView {
             closedButton.heightAnchor.constraint(equalToConstant: 70.0),
             
             view.topAnchor.constraint(equalTo: closedButton.bottomAnchor, constant: 10),
-            view.heightAnchor.constraint(equalToConstant: 150),
+            view.heightAnchor.constraint(equalToConstant: 200),
             view.leadingAnchor.constraint(equalTo: leadingAnchor),
             view.trailingAnchor.constraint(equalTo: trailingAnchor),
             view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
@@ -277,5 +283,19 @@ extension ProfileView: UITableViewDataSource, UITableViewDelegate {
                 delegate?.didTapProfileMenuOption(option)                
             }
         }
+    }
+}
+
+extension ProfileView: FooterViewDelegate {
+    func didTapLocalPhone() {
+        delegate?.didTapLocalPhone()
+    }
+    
+    func didTapOtherLocationsPhone() {
+        delegate?.didTapotherLocationsPhone()
+    }
+    
+    func didTapWebsite() {
+        delegate?.didTapWebview()
     }
 }
