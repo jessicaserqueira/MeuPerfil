@@ -10,10 +10,10 @@ import Foundation
 
 struct AppInfo {
     static var appVersion: String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Versão desconhecida"
     }
 
     static var buildNumber: String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Número de compilação desconhecido"
     }
 }

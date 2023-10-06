@@ -59,14 +59,16 @@ class FooterView: UIView {
         textColor: DesignSystem.Colors.secondary,
         accessibilityIdentifier: "FooterView.websiteLabel"
     )
+    
     private let versionLabel: UILabel = createLabel(
-        text: "Versão: 1.0.0",
+        text: "Versão: \(AppInfo.appVersion)",
         font: UIFont.roboto(ofSize: 14, weight: .regular),
         textColor: .black,
         accessibilityIdentifier: "FooterView.websiteLabel"
     )
+    
     private let buildLabel: UILabel = createLabel(
-        text: " (12345)",
+        text: "(\(AppInfo.buildNumber))",
         font: UIFont.roboto(ofSize: 14, weight: .regular),
         textColor: .black,
         accessibilityIdentifier: "FooterView.buildLabel"
@@ -118,7 +120,6 @@ class FooterView: UIView {
         setupSubviews()
         setupConstraints()
         setupPhoneLabelsGestures()
-        showVersionApp()
     }
     
     required init?(coder: NSCoder) {
@@ -146,7 +147,6 @@ class FooterView: UIView {
     }
     
     //MARK: - Actions
-    
     @objc private func handlePhoneLocalTap() {
         delegate?.didTapLocalPhone()
     }
@@ -171,14 +171,6 @@ class FooterView: UIView {
         let websiteTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleWebsiteTap))
         websiteLabel.isUserInteractionEnabled = true
         websiteLabel.addGestureRecognizer(websiteTapGesture)
-    }
-    
-    func showVersionApp() {
-        let appVersion = AppInfo.appVersion
-        let buildNumber = AppInfo.buildNumber
-
-        versionLabel.text = "Versão: \(appVersion)"
-        buildLabel.text = " (\(buildNumber))"
     }
     
     //MARK: - Constraints
