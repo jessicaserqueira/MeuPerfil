@@ -43,6 +43,7 @@ class ProfileViewModel {
                 userProfileImageURL = fileURL
                 saveUserProfileImageURL(url: fileURL)
                 delegate?.didSelectProfileImage(image)
+                updateProfileImage()
             } catch {
                 print("Error saving image: \(error)")
             }
@@ -73,6 +74,14 @@ class ProfileViewModel {
                 userProfileImageURL = imageURL
                 delegate?.didSelectProfileImage(imageData)
             }
+        }
+    }
+    
+    func updateProfileImage() {
+        if let imageURL = userProfileImageURL,
+           FileManager.default.fileExists(atPath: imageURL.path),
+           let imageData = try? Data(contentsOf: imageURL) {
+            delegate?.didSelectProfileImage(imageData)
         }
     }
     

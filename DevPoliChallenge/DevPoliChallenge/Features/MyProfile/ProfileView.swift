@@ -19,8 +19,6 @@ protocol ProfileViewDelegate: AnyObject {
 
 class ProfileView: UIView {
     
-    var urls = WebURLS()
-    
     var isSessionClosed = false
     weak var delegate: ProfileViewDelegate?
     
@@ -43,15 +41,16 @@ class ProfileView: UIView {
     
     var selectedImage: UIImage? {
         didSet {
-            profileImage.image = selectedImage
+            imageContainer.profileImage.image = selectedImage
         }
     }
+    
     private lazy var scrollView: UIScrollView = {
         let container = UIScrollView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.accessibilityIdentifier = "ProfileView.containerImage"
         addSubview(container)
-        container.addSubview(imageContainer)
+        container.addSubview(imageView)
         container.addSubview(labelName)
         container.addSubview(tableView)
         container.addSubview(view)
@@ -59,47 +58,25 @@ class ProfileView: UIView {
         return container
     }()
     
-    private lazy var imageContainer: UIView = {
-        let container = UIView()
+    private lazy var imageView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = "ProfileView.view"
+        view.addSubview(imageContainer)
+        return  view
+    }()
+    
+    private lazy var imageContainer: ImageView = {
+        let container = ImageView()
+        container.delegate = self
         container.backgroundColor = .clear
         container.translatesAutoresizingMaskIntoConstraints = false
         container.accessibilityIdentifier = "ProfileView.containerImage"
         addSubview(container)
-        container.addSubview(profileImage)
-        container.addSubview(imageContainerIcon)
         return container
     }()
-    
-    private lazy var profileImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "no-image")
-        image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 75
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.accessibilityIdentifier = "ProfileView.profileImage"
-        return image
-    }()
-    
-    private lazy var imageContainerIcon: UIView = {
-        let container = UIView()
-        container.backgroundColor = DesignSystem.Colors.primary
-        container.layer.cornerRadius = 21
-        container.translatesAutoresizingMaskIntoConstraints = false
-        container.accessibilityIdentifier = "ProfileView.containerImageIcon"
-        container.addSubview(buttonIcon)
-        return container
-    }()
-    
-    private lazy var buttonIcon: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "ic-camera"), for: .normal)
-        button.contentMode = .scaleAspectFill
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.accessibilityIdentifier = "ProfileView.imageIcon"
-        return button
-    }()
-    
+
     private lazy var labelName: UILabel = {
         let label = UILabel()
         label.text = "Sample Name"
@@ -138,7 +115,6 @@ class ProfileView: UIView {
         view.backgroundColor = DesignSystem.Colors.background
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.accessibilityIdentifier = "ProfileView.footerView"
-        
         return footerView
     }()
     
@@ -159,7 +135,6 @@ class ProfileView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
-        setupActions()
     }
     
     required init?(coder: NSCoder) {
@@ -174,25 +149,15 @@ class ProfileView: UIView {
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            imageContainer.topAnchor.constraint(equalTo: topAnchor, constant: 100),
-            imageContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageContainer.widthAnchor.constraint(equalToConstant: 150),
-            imageContainer.heightAnchor.constraint(equalToConstant: 150),
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 100),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 150),
+            imageView.heightAnchor.constraint(equalToConstant: 150),
             
-            profileImage.topAnchor.constraint(equalTo: imageContainer.topAnchor),
-            profileImage.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor),
-            profileImage.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor),
-            profileImage.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor),
-            
-            imageContainerIcon.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor, constant: -9),
-            imageContainerIcon.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor, constant: -9),
-            imageContainerIcon.heightAnchor.constraint(equalToConstant: 42),
-            imageContainerIcon.widthAnchor.constraint(equalToConstant: 42),
-            
-            buttonIcon.centerXAnchor.constraint(equalTo: imageContainerIcon.centerXAnchor),
-            buttonIcon.centerYAnchor.constraint(equalTo: imageContainerIcon.centerYAnchor),
-            buttonIcon.heightAnchor.constraint(equalToConstant: 24),
-            buttonIcon.widthAnchor.constraint(equalToConstant: 24),
+            imageContainer.topAnchor.constraint(equalTo: imageView.topAnchor),
+            imageContainer.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            imageContainer.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+            imageContainer.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             
             labelName.topAnchor.constraint(equalTo: imageContainer.bottomAnchor, constant: 11),
             labelName.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -220,21 +185,12 @@ class ProfileView: UIView {
     }
     
     //MARK: - Actions
-    
-    func setupActions() {
-        buttonIcon.addTarget(self, action: #selector(buttonIconTapped), for: .touchUpInside)
-    }
-    
-    @objc func buttonIconTapped() {
-        delegate?.didTapCameraIcon()
+    func updateProfileImage(image: UIImage?) {
+        imageContainer.profileImage.image = image
     }
     
     @objc func closedButtonTapped() {
         delegate?.didTapLogout()
-    }
-    
-    func updateProfileImage(image: UIImage?) {
-        profileImage.image = image
     }
 }
 
@@ -297,5 +253,11 @@ extension ProfileView: FooterViewDelegate {
     
     func didTapWebsite() {
         delegate?.didTapWebview()
+    }
+}
+
+extension ProfileView: ImageViewDelegate {
+    func didTapCameraIcon() {
+        delegate?.didTapCameraIcon()
     }
 }
