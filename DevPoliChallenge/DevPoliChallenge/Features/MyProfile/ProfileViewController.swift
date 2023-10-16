@@ -8,9 +8,15 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+protocol ProfileViewControllerDelegate: AnyObject {
+    func presentImagePicker()
+    func removeProfileImage()
+}
+
+class ProfileViewController: UIViewController, ProfileViewControllerDelegate {
     var customView = ProfileView()
     var viewModel = ProfileViewModel()
+    weak var delegate: ProfileViewControllerDelegate?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,23 +49,7 @@ class ProfileViewController: UIViewController {
     }
     
     func showImagePicker() {
-        let actions = [
-            UIAlertAction(title: "Alterar Imagem", style: .default) { [weak self] _ in
-                self?.presentImagePicker()
-            },
-            UIAlertAction(title: "Remover Imagem", style: .destructive) { [weak self] _ in
-                self?.removeProfileImage()
-            },
-            UIAlertAction(title: "Cancelar", style: .cancel)
-            
-        ]
-        
-        UIAlertController.showActionSheet(
-            from: self,
-            title: "Escolha uma opção",
-            message: nil,
-            actions: actions
-        )
+        CustomAlertManager.showImagePickerAlert(from: self)
     }
     
     func removeProfileImage() {
@@ -83,21 +73,7 @@ class ProfileViewController: UIViewController {
     }
     
     func showLogoutAlert() {
-        let alertTitle = "Encerrar Sessão"
-        let alertMessage = "Tem certeza de que deseja encerrar a sessão?"
-        
-        let confirmAction = UIAlertAction(title: "Sim", style: .destructive) { [weak self] _ in
-            self?.viewModel.logout()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel)
-        
-        UIAlertController.showActionSheet(
-            from: self,
-            title: alertTitle,
-            message: alertMessage,
-            actions: [confirmAction, cancelAction]
-        )
+        CustomAlertManager.showLogoutAlert(from: self)
     }
 }
 
@@ -137,24 +113,24 @@ extension ProfileViewController: ProfileViewModelDelegate, UIImagePickerControll
     }
     
     func didLogout() {
-         let loginViewController = MainViewController()
-         let navigationController = UINavigationController(rootViewController: loginViewController)
-         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let delegate = windowScene.delegate as? SceneDelegate {
-             delegate.window?.rootViewController = navigationController
-         }
-     }
+        let loginViewController = MainViewController()
+        let navigationController = UINavigationController(rootViewController: loginViewController)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let delegate = windowScene.delegate as? SceneDelegate {
+            delegate.window?.rootViewController = navigationController
+        }
+    }
     func didRemoveProfileImage() {
         customView.updateProfileImage(image: UIImage(named: "no-image"))
     }
     
     func didSelectProfileImage(_ imageData: Data?) {
         if let imageData = imageData,
-            let image = UIImage(data: imageData) {
+           let image = UIImage(data: imageData) {
             customView.updateProfileImage(image: image)
-
-         }
-     }
+            
+        }
+    }
     
     func showWebViewController(url: URL?) {
         guard let url = url else { return }
