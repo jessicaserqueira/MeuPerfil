@@ -8,13 +8,9 @@
 
 import UIKit
 
-protocol MainViewDelegate: AnyObject {
-    func showMyProfile()
-}
-
 class MainView: UIView {
     
-    weak var delegate: MainViewDelegate?
+    var didPressButton: (() -> Void)?
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -56,6 +52,6 @@ class MainView: UIView {
     }
     
     @objc func buttonTapped() {
-        delegate?.showMyProfile()
+       didPressButton?()
     }
 }

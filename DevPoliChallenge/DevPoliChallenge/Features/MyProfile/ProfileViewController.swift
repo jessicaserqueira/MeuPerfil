@@ -53,7 +53,6 @@ class ProfileViewController: UIViewController, ProfileViewControllerDelegate {
     }
     
     func removeProfileImage() {
-        customView.selectedImage = nil
         viewModel.removeProfileImage()
     }
     
@@ -77,7 +76,7 @@ class ProfileViewController: UIViewController, ProfileViewControllerDelegate {
     }
 }
 
-extension ProfileViewController:  ProfileViewDelegate {
+extension ProfileViewController: ProfileViewDelegate {
     func didTapLocalPhone() {
         viewModel.showLocalphone()
     }
@@ -120,6 +119,7 @@ extension ProfileViewController: ProfileViewModelDelegate, UIImagePickerControll
             delegate.window?.rootViewController = navigationController
         }
     }
+    
     func didRemoveProfileImage() {
         customView.updateProfileImage(image: UIImage(named: "no-image"))
     }

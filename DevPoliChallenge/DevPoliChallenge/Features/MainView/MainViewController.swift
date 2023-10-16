@@ -14,14 +14,14 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = customView
-        customView.delegate = self
         customView.backgroundColor = .white
+        showMyProfile()
     }
-}
-
-extension MainViewController: MainViewDelegate {
+    
     func showMyProfile() {
-        let VC = ProfileViewController()
-        navigationController?.pushViewController(VC, animated: true)
+        customView.didPressButton = { [weak self] in
+            let VC = ProfileViewController()
+            self?.navigationController?.pushViewController(VC, animated: true)
+        }
     }
 }
