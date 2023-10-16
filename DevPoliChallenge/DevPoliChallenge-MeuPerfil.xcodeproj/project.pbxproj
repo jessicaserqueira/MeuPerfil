@@ -158,6 +158,7 @@
 				A486B55F2AA7986400321DB3 /* MyProfile */,
 				A426DD692AB3492B0070B344 /* WebView */,
 				A42DF0322ABB6DD000BDF7F3 /* SectionViewController.swift */,
+				A42A19F02AD97CB3009C92BA /* CustomAlertManager.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -223,7 +224,6 @@
 		A4D0B5D32AC49A1900ADDCE8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				A42A19F02AD97CB3009C92BA /* CustomAlertManager.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
