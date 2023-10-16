@@ -18,6 +18,7 @@
 		A426DD6B2AB349600070B344 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A426DD6A2AB349600070B344 /* WebViewController.swift */; };
 		A42A19ED2ACF424F009C92BA /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42A19EC2ACF424F009C92BA /* AppInfo.swift */; };
 		A42A19EF2ACF4440009C92BA /* PhoneURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42A19EE2ACF4440009C92BA /* PhoneURLS.swift */; };
+		A42A19F12AD97CB3009C92BA /* CustomAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42A19F02AD97CB3009C92BA /* CustomAlertManager.swift */; };
 		A42DF0332ABB6DD000BDF7F3 /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DF0322ABB6DD000BDF7F3 /* SectionViewController.swift */; };
 		A42DF0352ABC83F900BDF7F3 /* ProfileMenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DF0342ABC83F900BDF7F3 /* ProfileMenuOption.swift */; };
 		A42DF0372ABCBA3300BDF7F3 /* UIAlertController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DF0362ABCBA3300BDF7F3 /* UIAlertController+ext.swift */; };
@@ -50,6 +51,7 @@
 		A426DD6A2AB349600070B344 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		A42A19EC2ACF424F009C92BA /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		A42A19EE2ACF4440009C92BA /* PhoneURLS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneURLS.swift; sourceTree = "<group>"; };
+		A42A19F02AD97CB3009C92BA /* CustomAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertManager.swift; sourceTree = "<group>"; };
 		A42DF0322ABB6DD000BDF7F3 /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		A42DF0342ABC83F900BDF7F3 /* ProfileMenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuOption.swift; sourceTree = "<group>"; };
 		A42DF0362ABCBA3300BDF7F3 /* UIAlertController+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ext.swift"; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		A4D0B5D32AC49A1900ADDCE8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				A42A19F02AD97CB3009C92BA /* CustomAlertManager.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				A42DF0372ABCBA3300BDF7F3 /* UIAlertController+ext.swift in Sources */,
 				A486B5622AA79B0F00321DB3 /* ProfileView.swift in Sources */,
 				A42DF0332ABB6DD000BDF7F3 /* SectionViewController.swift in Sources */,
+				A42A19F12AD97CB3009C92BA /* CustomAlertManager.swift in Sources */,
 				A486B5672AA8AF9600321DB3 /* Section.swift in Sources */,
 				A4CB397A2AB0AAB700828A33 /* ProfileViewModel.swift in Sources */,
 				4C33FF352A75A4550002E765 /* DS+Colors.swift in Sources */,
