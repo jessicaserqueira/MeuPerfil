@@ -39,12 +39,6 @@ class ProfileView: UIView {
         ])
     ]
     
-    var selectedImage: UIImage? {
-        didSet {
-            imageContainer.profileImage.image = selectedImage
-        }
-    }
-    
     private lazy var scrollView: UIScrollView = {
         let container = UIScrollView()
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +70,7 @@ class ProfileView: UIView {
         addSubview(container)
         return container
     }()
-
+    
     private lazy var labelName: UILabel = {
         let label = UILabel()
         label.text = "Sample Name"
@@ -185,10 +179,6 @@ class ProfileView: UIView {
     }
     
     //MARK: - Actions
-    func updateProfileImage(image: UIImage?) {
-        imageContainer.profileImage.image = image
-    }
-    
     @objc func closedButtonTapped() {
         delegate?.didTapLogout()
     }
@@ -236,7 +226,7 @@ extension ProfileView: UITableViewDataSource, UITableViewDelegate {
         if let option = ProfileMenuOption(rawValue: cellData.rawValue) {
             switch option {
             case .personalData, .addresses, .cards, .myRequests, .extract, .termsOfUse, .privacyPolicy, .faq:
-                delegate?.didTapProfileMenuOption(option)                
+                delegate?.didTapProfileMenuOption(option)
             }
         }
     }
@@ -260,4 +250,9 @@ extension ProfileView: ImageViewDelegate {
     func didTapCameraIcon() {
         delegate?.didTapCameraIcon()
     }
+    
+    func updateProfileImage(image: UIImage?) {
+        imageContainer.profileImage.image = image
+    }
+    
 }
