@@ -85,8 +85,7 @@ class ImageView: UIView {
             buttonIcon.centerXAnchor.constraint(equalTo: imageContainerIcon.centerXAnchor),
             buttonIcon.centerYAnchor.constraint(equalTo: imageContainerIcon.centerYAnchor),
             buttonIcon.heightAnchor.constraint(equalToConstant: 24),
-            buttonIcon.widthAnchor.constraint(equalToConstant: 24),
-            
+            buttonIcon.widthAnchor.constraint(equalToConstant: 24)            
         ])
     }
     

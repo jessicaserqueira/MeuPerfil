@@ -124,7 +124,7 @@ class ProfileView: UIView {
         return button
     }()
     
-    //MARK: - Initializer
+// MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()

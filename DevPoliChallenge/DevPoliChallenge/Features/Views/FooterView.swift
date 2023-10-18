@@ -192,7 +192,7 @@ class FooterView: UIView {
             
             stackViewVersion.topAnchor.constraint(equalTo: websiteLabel.bottomAnchor, constant: 5),
             stackViewVersion.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackViewVersion.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            stackViewVersion.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 }
