@@ -110,7 +110,7 @@ class FooterView: UIView {
         return label
     }
     
-    //MARK: - Initializer
+// MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -125,7 +125,7 @@ class FooterView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - SetupViews
+// MARK: - SetupViews
     private func setupSubviews() {
         
         addSubview(titleLabel)
@@ -145,7 +145,7 @@ class FooterView: UIView {
         stackViewVersion.addArrangedSubview(buildLabel)
     }
     
-    //MARK: - Actions
+// MARK: - Actions
     @objc private func handlePhoneLocalTap() {
         delegate?.didTapLocalPhone()
     }
@@ -172,7 +172,7 @@ class FooterView: UIView {
         websiteLabel.addGestureRecognizer(websiteTapGesture)
     }
     
-    //MARK: - Constraints
+// MARK: - Constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),

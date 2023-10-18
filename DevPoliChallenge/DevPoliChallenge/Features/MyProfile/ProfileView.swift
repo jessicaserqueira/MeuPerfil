@@ -134,7 +134,7 @@ class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Constraints
+// MARK: - Constraints
     func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -177,7 +177,7 @@ class ProfileView: UIView {
         ])
     }
     
-    //MARK: - Actions
+// MARK: - Actions
     @objc func closedButtonTapped() {
         delegate?.didTapLogout()
     }

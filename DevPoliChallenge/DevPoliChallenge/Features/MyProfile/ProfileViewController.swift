@@ -134,14 +134,14 @@ extension ProfileViewController: ProfileViewModelDelegate, UIImagePickerControll
     
     func showWebViewController(url: URL?) {
         guard let url = url else { return }
-        let vc = WebViewController()
-        vc.webURL = url
-        navigationController?.pushViewController(vc, animated: true)
+        let viewController = WebViewController()
+        viewController.webURL = url
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showController(withTitle title: String) {
-        let vc = SectionViewController()
-        vc.title = title
-        navigationController?.pushViewController(vc, animated: true)
+        let viewController = SectionViewController()
+        viewController.title = title
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

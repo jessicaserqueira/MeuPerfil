@@ -10,7 +10,7 @@ import UIKit
 
 class SectionViewController: UIViewController {
     
-    // MARK: - Properties
+// MARK: - Properties
     private lazy var label: UILabel = {
         let label = UILabel()
         label.text = "Página em construção"
@@ -21,13 +21,13 @@ class SectionViewController: UIViewController {
         return label
     }()
     
-    // MARK: - Lifecycle Methods
+// MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
-    // MARK: - UI Setup
+// MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = .white
         setupNavigationBar()
@@ -53,7 +53,7 @@ class SectionViewController: UIViewController {
         ])
     }
     
-    // MARK: - Actions
+// MARK: - Actions
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
