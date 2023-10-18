@@ -20,8 +20,8 @@ class MainViewController: UIViewController {
     
     func showMyProfile() {
         customView.didPressButton = { [weak self] in
-            let VC = ProfileViewController()
-            self?.navigationController?.pushViewController(VC, animated: true)
+            let viewController = ProfileViewController()
+            self?.navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }

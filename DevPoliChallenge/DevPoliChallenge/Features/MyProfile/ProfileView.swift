@@ -18,7 +18,6 @@ protocol ProfileViewDelegate: AnyObject {
 }
 
 class ProfileView: UIView {
-    
     var isSessionClosed = false
     weak var delegate: ProfileViewDelegate?
     
@@ -125,7 +124,7 @@ class ProfileView: UIView {
         return button
     }()
     
-    //MARK: - Initializer
+// MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
@@ -135,7 +134,7 @@ class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Constraints
+// MARK: - Constraints
     func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -178,7 +177,7 @@ class ProfileView: UIView {
         ])
     }
     
-    //MARK: - Actions
+// MARK: - Actions
     @objc func closedButtonTapped() {
         delegate?.didTapLogout()
     }

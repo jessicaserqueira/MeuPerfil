@@ -19,7 +19,6 @@ protocol ProfileViewModelDelegate: AnyObject {
 }
 
 class ProfileViewModel {
-    
     weak var delegate: ProfileViewModelDelegate?
     var userProfileImageURL: URL?
     var urls = WebURLS()

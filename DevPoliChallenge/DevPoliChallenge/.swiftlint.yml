@@ -3,6 +3,7 @@ disabled_rules: # rule identifiers to exclude from running
   - comma
   - control_statement
   - line_lenght
+  - trailing_whitespace
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - Pods
@@ -14,3 +15,4 @@ force_try:
   severity: warning # explicitly
 # rules that have both warning and error levels, can set just the warning level
 # implicitly
+line_length: 130

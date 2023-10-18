@@ -13,7 +13,6 @@ protocol ImageViewDelegate: AnyObject {
 }
 
 class ImageView: UIView {
-    
     weak var delegate: ImageViewDelegate?
 
     private lazy var imageContainer: UIView = {
@@ -59,7 +58,7 @@ class ImageView: UIView {
         return button
     }()
     
-    //MARK: - Initializer
+// MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
@@ -70,7 +69,7 @@ class ImageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Constraints
+// MARK: - Constraints
     func setupConstraints() {
         NSLayoutConstraint.activate([
             profileImage.topAnchor.constraint(equalTo: imageContainer.topAnchor),
@@ -86,12 +85,11 @@ class ImageView: UIView {
             buttonIcon.centerXAnchor.constraint(equalTo: imageContainerIcon.centerXAnchor),
             buttonIcon.centerYAnchor.constraint(equalTo: imageContainerIcon.centerYAnchor),
             buttonIcon.heightAnchor.constraint(equalToConstant: 24),
-            buttonIcon.widthAnchor.constraint(equalToConstant: 24),
-            
+            buttonIcon.widthAnchor.constraint(equalToConstant: 24)            
         ])
     }
     
-    //MARK: - Actions
+// MARK: - Actions
     func setupActions() {
         buttonIcon.addTarget(self, action: #selector(buttonIconTapped), for: .touchUpInside)
     }

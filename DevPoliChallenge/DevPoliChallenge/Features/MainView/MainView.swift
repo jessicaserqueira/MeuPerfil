@@ -9,7 +9,6 @@
 import UIKit
 
 class MainView: UIView {
-    
     var didPressButton: (() -> Void)?
     
     private lazy var button: UIButton = {
@@ -25,7 +24,7 @@ class MainView: UIView {
         return button
     }()
     
-    // MARK: - Initializer
+// MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
@@ -36,7 +35,7 @@ class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Constraints
+// MARK: - Constraints
     func setupConstraints() {
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -46,7 +45,7 @@ class MainView: UIView {
         ])
     }
     
-    // MARK: - Actions
+// MARK: - Actions
     func setupActions() {
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
