@@ -18,7 +18,6 @@ protocol ProfileViewDelegate: AnyObject {
 }
 
 class ProfileView: UIView {
-    
     var isSessionClosed = false
     weak var delegate: ProfileViewDelegate?
     

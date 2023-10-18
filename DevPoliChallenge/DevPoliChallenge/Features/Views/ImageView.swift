@@ -13,7 +13,6 @@ protocol ImageViewDelegate: AnyObject {
 }
 
 class ImageView: UIView {
-    
     weak var delegate: ImageViewDelegate?
 
     private lazy var imageContainer: UIView = {

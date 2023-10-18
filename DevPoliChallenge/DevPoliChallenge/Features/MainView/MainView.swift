@@ -9,7 +9,6 @@
 import UIKit
 
 class MainView: UIView {
-    
     var didPressButton: (() -> Void)?
     
     private lazy var button: UIButton = {

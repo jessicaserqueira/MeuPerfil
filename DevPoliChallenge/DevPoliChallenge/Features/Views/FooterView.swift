@@ -15,7 +15,6 @@ protocol FooterViewDelegate: AnyObject {
 }
 
 class FooterView: UIView {
-    
     weak var delegate: FooterViewDelegate?
     
     private let titleLabel: UILabel = createLabel(
